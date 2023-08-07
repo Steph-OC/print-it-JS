@@ -17,22 +17,28 @@ const slides = [
 	}
 ]
 
+const sectionDot = document.querySelector(".dots");
+let numeroSlide = document.querySelector('.banner-img');
+let numeroSelected = 0;
+
 // click flèche gauche et droite
 const arrow_left = document.querySelector('.arrow_left')
 arrow_left.addEventListener('click', function (event) {
+	numeroSelected = numeroSelected - 1;
+	numeroSlide.src = "assets/" + slides[numeroSelected]["image"];
+		
 	console.log(event)
 })
 
 const arrow_right = document.querySelector('.arrow_right')
 arrow_right.addEventListener('click', function (event) {
-	console.log(event)
+	numeroSelected = numeroSelected + 1;
+	numeroSlide.src = "assets/" + slides[numeroSelected]["image"];
+	console.log(event);
+	
 })
 
-
-const sectionDot = document.querySelector(".dots");
-const numeroSelected = 0;
 //création des bullets
-//boucle sur le tableau slides
 for (let i = 0; i < slides.length; i++) {
 	//création d'une div avec la class dot
 	const divDot = document.createElement("div");
@@ -40,6 +46,7 @@ for (let i = 0; i < slides.length; i++) {
 
 	if (numeroSelected === i) {
 		divDot.classList.add("dot_selected");
+		
 	}
 	//rattacher à la balise parent
 	sectionDot.appendChild(divDot);
