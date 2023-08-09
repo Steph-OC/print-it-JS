@@ -18,24 +18,28 @@ const slides = [
 ]
 
 const sectionDot = document.querySelector(".dots");
-let numeroSlide = document.querySelector('.banner-img');
+const banner = document.getElementById("banner");
+const bannerSlide = banner.querySelector('.banner-img');
+const textSlide = banner.querySelector("p");
 let numeroSelected = 0;
 
-// click flèche gauche et droite
-const arrow_left = document.querySelector('.arrow_left')
+
+// click flèche gatuche et droite
+const arrow_left = document.querySelector('.arrow_left');
 arrow_left.addEventListener('click', function (event) {
 	numeroSelected = numeroSelected - 1;
-	numeroSlide.src = "assets/" + slides[numeroSelected]["image"];
-		
-	console.log(event)
-})
-
-const arrow_right = document.querySelector('.arrow_right')
-arrow_right.addEventListener('click', function (event) {
-	numeroSelected = numeroSelected + 1;
-	numeroSlide.src = "assets/" + slides[numeroSelected]["image"];
+	bannerSlide.src = "assets/" + slides[numeroSelected].image;
+	textSlide.innerHTML = slides[numeroSelected].tagLine;
 	console.log(event);
 	
+})
+
+const arrow_right = document.querySelector('.arrow_right');
+arrow_right.addEventListener('click', function (event) {
+	numeroSelected = numeroSelected + 1;
+	bannerSlide.src = "assets/" + slides[numeroSelected].image;
+	textSlide.innerHTML = slides[numeroSelected].tagLine;
+	console.log(event);
 })
 
 //création des bullets
@@ -50,7 +54,6 @@ for (let i = 0; i < slides.length; i++) {
 	}
 	//rattacher à la balise parent
 	sectionDot.appendChild(divDot);
-	console.log(slides[i])
-	console.log(divDot)
+	
 
 }
