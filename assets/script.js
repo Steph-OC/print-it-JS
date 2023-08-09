@@ -21,24 +21,30 @@ const sectionDot = document.querySelector(".dots");
 const banner = document.getElementById("banner");
 const bannerSlide = banner.querySelector('.banner-img');
 const textSlide = banner.querySelector("p");
-let numeroSelected = 0;
+let numeroSlide = 0;
 
 
-// click flèche gatuche et droite
+// clic flèche gauche
 const arrow_left = document.querySelector('.arrow_left');
 arrow_left.addEventListener('click', function (event) {
-	numeroSelected = numeroSelected - 1;
-	bannerSlide.src = "assets/" + slides[numeroSelected].image;
-	textSlide.innerHTML = slides[numeroSelected].tagLine;
+	numeroSlide = numeroSlide - 1;
+	if (numeroSlide < 0) {
+		numeroSlide = slides.length - 1;
+	}
+	bannerSlide.src = "assets/" + slides[numeroSlide].image;
+	textSlide.innerHTML = slides[numeroSlide].tagLine;
 	console.log(event);
-	
-})
 
+})
+//clic flèche droite
 const arrow_right = document.querySelector('.arrow_right');
 arrow_right.addEventListener('click', function (event) {
-	numeroSelected = numeroSelected + 1;
-	bannerSlide.src = "assets/" + slides[numeroSelected].image;
-	textSlide.innerHTML = slides[numeroSelected].tagLine;
+	numeroSlide = numeroSlide + 1;
+	if (numeroSlide > slides.length - 1) {
+		numeroSlide = 0;
+	}
+	bannerSlide.src = "assets/" + slides[numeroSlide].image;
+	textSlide.innerHTML = slides[numeroSlide].tagLine;
 	console.log(event);
 })
 
@@ -48,12 +54,11 @@ for (let i = 0; i < slides.length; i++) {
 	const divDot = document.createElement("div");
 	divDot.classList.add("dot");
 
-	if (numeroSelected === i) {
+	if (numeroSlide === i) {
 		divDot.classList.add("dot_selected");
-		
 	}
+
 	//rattacher à la balise parent
 	sectionDot.appendChild(divDot);
-	
-
 }
+
