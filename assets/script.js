@@ -17,6 +17,7 @@ const slides = [
 	}
 ]
 
+const banner = document.getElementById("banner");
 const bannerSlide = banner.querySelector('.banner-img');
 const sectionDot = document.querySelector(".dots");
 const textSlide = banner.querySelector("p");
@@ -31,39 +32,39 @@ for (let i = 0; i < slides.length; i++) {
 	sectionDot.appendChild(divDot);
 }
 //récupération des dots sous forme de tableau
+// assignation de la class dot_select sur la premiere dot
 let dots = document.getElementsByClassName("dot");
-// assignation de la class dot active sur la premiere dot
 dots[0].classList.add("dot_selected");
 
-//clic flèche droite
-const arrow_right = document.querySelector('.arrow_right');
-arrow_right.addEventListener('click', function (event) {
-	currentIndex = currentIndex + 1;
-	if (currentIndex > slides.length - 1) {
-		currentIndex = 0;
-	}
-	//on retire la class "dot_select" de chaque dot
+function changeSlide() {
 	for (const dot of dots) {
 		dot.classList.remove("dot_selected");
 	}
 	dots[currentIndex].classList.add("dot_selected");
 	bannerSlide.src = "assets/" + slides[currentIndex].image;
 	textSlide.innerHTML = slides[currentIndex].tagLine;
-})
+}
 
-// clic flèche gauche
-const arrow_left = document.querySelector('.arrow_left');
-arrow_left.addEventListener('click', function (event) {
-	currentIndex = currentIndex - 1;
+function clicArrow(sens) {
+	currentIndex = currentIndex + sens;
 	if (currentIndex < 0) {
 		currentIndex = slides.length - 1;
 	}
-	for (const dot of dots) {
-		dot.classList.remove("dot_selected");
+	if (currentIndex > slides.length - 1) {
+		currentIndex = 0;
 	}
-	dots[currentIndex].classList.add("dot_selected");
-	bannerSlide.src = "assets/" + slides[currentIndex].image;
-	textSlide.innerHTML = slides[currentIndex].tagLine;
-})
+	changeSlide();
+}
 
+//clic flèche droite
+const arrow_right = document.querySelector('.arrow_right');
+arrow_right.addEventListener('click', function () {
+	clicArrow(1);
+});
+
+// clic flèche gauche
+const arrow_left = document.querySelector('.arrow_left');
+arrow_left.addEventListener('click', function () {
+	clicArrow(-1);
+})
 
