@@ -17,48 +17,53 @@ const slides = [
 	}
 ]
 
-const sectionDot = document.querySelector(".dots");
-const banner = document.getElementById("banner");
 const bannerSlide = banner.querySelector('.banner-img');
+const sectionDot = document.querySelector(".dots");
 const textSlide = banner.querySelector("p");
-let numeroSlide = 0;
-
-
-// clic flèche gauche
-const arrow_left = document.querySelector('.arrow_left');
-arrow_left.addEventListener('click', function (event) {
-	numeroSlide = numeroSlide - 1;
-	if (numeroSlide < 0) {
-		numeroSlide = slides.length - 1;
-	}
-	bannerSlide.src = "assets/" + slides[numeroSlide].image;
-	textSlide.innerHTML = slides[numeroSlide].tagLine;
-	console.log(event);
-
-})
-//clic flèche droite
-const arrow_right = document.querySelector('.arrow_right');
-arrow_right.addEventListener('click', function (event) {
-	numeroSlide = numeroSlide + 1;
-	if (numeroSlide > slides.length - 1) {
-		numeroSlide = 0;
-	}
-	bannerSlide.src = "assets/" + slides[numeroSlide].image;
-	textSlide.innerHTML = slides[numeroSlide].tagLine;
-	console.log(event);
-})
+let currentIndex = 0;
 
 //création des bullets
 for (let i = 0; i < slides.length; i++) {
 	//création d'une div avec la class dot
-	const divDot = document.createElement("div");
+	let divDot = document.createElement("div");
 	divDot.classList.add("dot");
-
-	if (numeroSlide === i) {
-		divDot.classList.add("dot_selected");
-	}
-
 	//rattacher à la balise parent
 	sectionDot.appendChild(divDot);
 }
+//récupération des dots sous forme de tableau
+let dots = document.getElementsByClassName("dot");
+// assignation de la class dot active sur la premiere dot
+dots[0].classList.add("dot_selected");
+
+//clic flèche droite
+const arrow_right = document.querySelector('.arrow_right');
+arrow_right.addEventListener('click', function (event) {
+	currentIndex = currentIndex + 1;
+	if (currentIndex > slides.length - 1) {
+		currentIndex = 0;
+	}
+	//on retire la class "dot_select" de chaque dot
+	for (const dot of dots) {
+		dot.classList.remove("dot_selected");
+	}
+	dots[currentIndex].classList.add("dot_selected");
+	bannerSlide.src = "assets/" + slides[currentIndex].image;
+	textSlide.innerHTML = slides[currentIndex].tagLine;
+})
+
+// clic flèche gauche
+const arrow_left = document.querySelector('.arrow_left');
+arrow_left.addEventListener('click', function (event) {
+	currentIndex = currentIndex - 1;
+	if (currentIndex < 0) {
+		currentIndex = slides.length - 1;
+	}
+	for (const dot of dots) {
+		dot.classList.remove("dot_selected");
+	}
+	dots[currentIndex].classList.add("dot_selected");
+	bannerSlide.src = "assets/" + slides[currentIndex].image;
+	textSlide.innerHTML = slides[currentIndex].tagLine;
+})
+
 
