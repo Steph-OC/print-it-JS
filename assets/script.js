@@ -32,7 +32,7 @@ for (let i = 0; i < slides.length; i++) {
 	sectionDot.appendChild(divDot);
 }
 //récupération des dots sous forme de tableau
-// assignation de la class dot_select sur la premiere dot
+// assignation de la classe dot_select sur la premiere dot
 let dots = document.getElementsByClassName("dot");
 dots[0].classList.add("dot_selected");
 
@@ -66,5 +66,4 @@ arrow_right.addEventListener('click', function () {
 const arrow_left = document.querySelector('.arrow_left');
 arrow_left.addEventListener('click', function () {
 	clicArrow(-1);
-})
-
+});
