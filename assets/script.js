@@ -36,6 +36,18 @@ for (let i = 0; i < slides.length; i++) {
 let dots = document.getElementsByClassName("dot");
 dots[0].classList.add("dot_selected");
 
+//clic flèche droite
+const arrow_right = document.querySelector('.arrow_right');
+arrow_right.addEventListener('click', function () {
+	clicArrow(1);
+});
+
+// clic flèche gauche
+const arrow_left = document.querySelector('.arrow_left');
+arrow_left.addEventListener('click', function () {
+	clicArrow(-1);
+});
+
 function changeSlide() {
 	for (const dot of dots) {
 		dot.classList.remove("dot_selected");
@@ -55,15 +67,3 @@ function clicArrow(sens) {
 	}
 	changeSlide();
 }
-
-//clic flèche droite
-const arrow_right = document.querySelector('.arrow_right');
-arrow_right.addEventListener('click', function () {
-	clicArrow(1);
-});
-
-// clic flèche gauche
-const arrow_left = document.querySelector('.arrow_left');
-arrow_left.addEventListener('click', function () {
-	clicArrow(-1);
-});
